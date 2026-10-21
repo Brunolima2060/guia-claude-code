@@ -61,6 +61,50 @@ Antes de qualquer ação que não dá para desfazer (deploy em produção, apaga
 
 ---
 
+## 📱 Programar pelo celular (Remote Control)
+
+O computador continua fazendo o trabalho e o celular só controla. O Claude Code roda no PC, e o app do Claude no celular mostra a conversa e deixa você mandar pedidos de qualquer lugar. Arquivos e ferramentas ficam no PC.
+
+**Você precisa de:** um computador ligado com Claude Code instalado e logado, o app **Claude** no celular logado na **mesma conta**, e internet nos dois.
+
+**Passo a passo:**
+
+1. No PC, dentro da pasta do projeto, rode:
+   ```bash
+   claude remote-control --name "meu-pc"
+   ```
+2. No celular, abra o app Claude, entre na área do **Claude Code** e escolha a sessão "meu-pc". Também aparece em https://claude.ai/code no navegador.
+3. Digite ou fale o pedido no celular. O Claude executa no PC (cria arquivos, roda testes, faz deploy) e a resposta volta pro celular.
+
+Já está numa sessão aberta no PC? Digite `/remote-control` nela e conecte a sessão que já existe, sem abrir outra.
+
+**Opções úteis:**
+
+| Opção | Pra que serve |
+|---|---|
+| `--name "nome"` | Nome da sessão no celular |
+| `--continue` | Volta pra última sessão daquela pasta (vale por ~4 horas) |
+| `--spawn worktree` | Cada sessão nova trabalha numa cópia isolada do projeto |
+| `--permission-mode` | Como o Claude pede permissão (`default`, `acceptEdits`, `plan`...) |
+
+**Cuidados:**
+- O PC precisa ficar **ligado, acordado e com o terminal aberto**. Se hibernar ou fechar, a conexão cai. No notebook, desative a suspensão ao fechar a tampa.
+- Deixe o Claude **pedir aprovação** pro que for sensível. Liberar tudo (`bypassPermissions`) com acesso remoto é arriscado.
+- Quem entra na sua conta Claude controla seu PC. Use senha forte e verificação em duas etapas.
+- Combina com o modo automático: do celular você pede "publica", e o Claude usa a Vercel, o Render e o Supabase pela CLI. Mantenha `git push` e `vercel --prod` na lista `deny` pra nada ir pra produção sem o seu ok.
+
+**Prompt pra colar no Claude Code do PC:**
+
+```text
+Quero programar pelo celular. Explique e configure o Remote Control do Claude Code:
+1. Confirme que meu Claude Code está atualizado e logado.
+2. Me diga o comando para deixar esta pasta disponível no celular e rode com um nome fácil.
+3. Me lembre de manter o PC acordado (sem suspender) enquanto eu usar.
+4. Me explique como abrir a sessão no app Claude do celular.
+```
+
+---
+
 ## 🗺️ O mapa rápido
 
 | Ferramenta | Em uma frase | Vale a pena? |
