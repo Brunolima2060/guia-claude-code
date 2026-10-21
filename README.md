@@ -8,6 +8,59 @@ Tudo aponta pra repositórios públicos oficiais. Zero chave, zero dado pessoal.
 
 ---
 
+## ⚡ Atalho: deixa o Claude instalar tudo
+
+Não precisa fazer nada na mão. Abra o Claude Code e cole isto:
+
+```text
+Leia https://github.com/Brunolima2060/guia-claude-code e configure meu ambiente seguindo o guia:
+1. Instale o RTK (winget install rtk-ai.rtk no Windows, ou brew install rtk), rode rtk init -g e confirme com rtk --version.
+2. Me diga os comandos /plugin para instalar o Superpowers e as skills de exemplo da Anthropic (esses eu preciso digitar).
+3. Crie um CLAUDE.md básico na pasta onde estou.
+Faça um passo de cada vez, me explique o que fez e avise quando eu precisar reiniciar o Claude Code.
+Não instale o Remotion ainda; pergunte antes.
+```
+
+Quando quiser vídeo, é só pedir: *"Leia o guia e configure o Remotion pra mim, depois faz um vídeo vertical de 15 segundos sobre X."*
+
+> O comando `/plugin` é interno do Claude Code, então só você consegue digitar. O resto ele faz sozinho.
+
+---
+
+## 🤖 Modo automático: Claude mexendo em Vercel, Render e Supabase pela linha de comando
+
+Quando o Claude tem as CLIs dessas plataformas instaladas e logadas, ele deixa de te dar passo a passo e **faz o deploy, vê os logs e ajusta o banco por conta própria**. Você só pede.
+
+| Serviço | Pra que serve | Instalar | Logar |
+|---|---|---|---|
+| **GitHub (`gh`)** | repositórios, PRs | `winget install GitHub.cli` | `gh auth login` |
+| **Vercel** | publicar sites (Next.js, front) | `npm i -g vercel` | `vercel login` |
+| **Render** | backends e APIs | baixe o binário em https://github.com/render-oss/cli/releases (Mac: `brew install render`) | `render login` |
+| **Supabase** | banco Postgres, auth, storage | Windows: `scoop install supabase` (Mac: `brew install supabase/tap/supabase`) | `supabase login` |
+
+Cada login abre o navegador uma vez. Depois o Claude usa a sessão salva.
+
+**Prompt pra colar no Claude Code:**
+
+```text
+Quero trabalhar em modo automático com a CLI. Instale e deixe prontas as CLIs do GitHub (gh), Vercel, Render e Supabase.
+Para cada uma: instale, confirme a versão e rode o login (me avise quando abrir o navegador para eu autorizar).
+Depois, a partir de agora, quando eu pedir para publicar, ver logs, aplicar migração ou criar banco, faça direto pela CLI, sem me passar o passo a passo.
+Antes de qualquer ação que não dá para desfazer (deploy em produção, apagar dado, mexer em banco real, gastar dinheiro), me mostre o que vai fazer e espere meu ok.
+```
+
+**Exemplos de pedidos depois disso:**
+- *"Publica esse site na Vercel."*
+- *"Vê o log do último deploy no Render e me diz por que caiu."*
+- *"Cria uma tabela de clientes no Supabase e conecta no meu projeto."*
+
+**Segurança (importante):**
+- Chaves e tokens ficam em variáveis de ambiente da plataforma ou no `.env` (que vai no `.gitignore`). Nunca no chat nem no código.
+- Deixe `git push` e `vercel --prod` na lista `deny` do `settings.json` se quiser aprovar cada publicação na mão. Automático não precisa ser sem freio.
+- Teste primeiro em projeto de teste, não no sistema de cliente.
+
+---
+
 ## 🗺️ O mapa rápido
 
 | Ferramenta | Em uma frase | Vale a pena? |
